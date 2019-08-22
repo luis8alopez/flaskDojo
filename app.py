@@ -11,7 +11,13 @@ b = arr
 
 @app.route('/<int:number>')
 def hello_world(number):
-    return json.dumps({'result':b[number]})
+
+    response = app.response_class(
+        response=json.dumps(b[number]),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 @app.route('/numbers',methods=['GET','POST'])
 def convertNumber():
