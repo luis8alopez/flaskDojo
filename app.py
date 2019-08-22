@@ -12,6 +12,9 @@ b = arr
 @Myapp.route('/<int:number>')
 def hello_world(number):
 
+    if(number <0 or number >100):
+        return jsonify({'message': 'The number must be between 1 and 100, both included'})
+
     response = Myapp.response_class(
         response=json.dumps(b[number]),
         status=200,
