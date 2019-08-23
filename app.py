@@ -1,5 +1,6 @@
 from flask import Flask 
 from flask import jsonify
+from flask import request
 import json
 import array
 
@@ -9,14 +10,17 @@ arr = ['Not defined','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XI
 
 b = arr
 
-@Myapp.route('/<int:number>')
-def hello_world(number):
+@Myapp.route('/')
+def fromArabicToRoman():
+
+    n = request.args.get('number')
+    number = int(n)
 
     if(number <0 or number >100):
         return jsonify({'message': 'The number must be between 1 and 100, both included'})
 
     response = Myapp.response_class(
-        response=json.dumps(b[number]),
+        response=json.dumps({"in arabic ": number,"in roman ":b[number]}),
         status=200,
         mimetype='application/json'
     )
